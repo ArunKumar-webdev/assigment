@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import { display } from "@mui/system";
 
 export const useStyles = makeStyles((theme) => ({
   main: {
@@ -20,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "20px"
   },
   btnCancel: {
-    color: "red",
+    color: "grey",
     backgroundColor: "white",
     marginLeft: "10px",
     textTransform: "capitalize"
@@ -46,12 +47,14 @@ export const useStyles = makeStyles((theme) => ({
     margin: "10px"
   },
   divautoComplete: {
-    border: "3px solid white"
+    border: "3px solid white",
+    marginLeft: "10px",
+    display: "flex"
   },
   divbtnSave: {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "lightgrey",
+    backgroundColor: "lightblue",
     position: "absolute",
     bottom: "0",
     height: "80px",
@@ -59,13 +62,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   btnSave: {
     color: "white",
-    backgroundColor: "rgb(63, 214, 181)",
+    backgroundColor: "grey",
     marginLeft: "10px",
     textTransform: "none"
   },
   link: {
     fontSize: "12px",
-    textTransform: "capitalize"
   },
   divauto2: {
     border: "3px solid lightblue"

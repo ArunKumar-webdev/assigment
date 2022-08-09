@@ -4,9 +4,10 @@ import Autocomplete from "@mui/material/Autocomplete";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Button, Typography } from "@mui/material";
 import Link from "@mui/material/Link";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import axios from "axios";
 import { useStyles } from "./style";
+import Box, { BoxProps } from '@mui/material/Box';
 
 const optionsList = [
   { label: "First Name", value: "first_name" },
@@ -17,7 +18,11 @@ const optionsList = [
   { label: "City", value: "city" },
   { label: "State", value: "state" }
 ];
+
+let randomColors = '#ADD8E6';
+
 const Popup = ({ click }) => {
+
   const [options, setoptions] = React.useState(optionsList);
   const [inputValue, setInputValue] = React.useState([]);
   const [array, setarray] = React.useState([]);
@@ -35,7 +40,9 @@ const Popup = ({ click }) => {
 
     setoptions(opt);
   };
+
   const handleLink = () => {
+    randomColor();
     const dummyarr = [...array];
     if (inputValue !== "") {
       dummyarr.push(value);
@@ -66,6 +73,13 @@ const Popup = ({ click }) => {
   const handleClick_Cancel = () => {
     click("right", false);
   };
+
+
+  function randomColor() {
+    randomColors = Math.floor(Math.random() * 16777215).toString(16);
+    return randomColors;
+
+  }
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -107,7 +121,7 @@ const Popup = ({ click }) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <diV className={classes.popup}>
           <Button className={classes.btnSegment} onClick={handleClick_Cancel}>
-            <ArrowBackIosIcon /> Saving Segment
+            <KeyboardArrowLeftIcon /> Saving Segment
           </Button>
         </diV>
         <div className={classes.middle}>
@@ -128,10 +142,36 @@ const Popup = ({ click }) => {
               query
             </Typography>
             <br />
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              p: 1,
+              m: 1,
+              bgcolor: 'background.paper',
+              borderRadius: 1,
+            }}>
+              <div style={{ display: "flex", alignItems: 'center', marginRight: "1rem" }} id='UserTraits'>
+                <div className="usertrait">
+
+                </div>
+                <div>
+                  User Traits
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: 'center' }} id='GroupTraits'>
+                <div className="GroupTraits">
+
+                </div>
+                <div>
+                  Group Traits
+                </div>
+              </div>
+            </Box>
             <div className={array.length ? classes.divauto2 : ""}>
               {array.map((item, index) => {
                 return (
                   <div className={classes.disauto2} key={index}>
+                    <div id='randomcolor' style={{ backgroundColor: '#' + randomColors, marginTop: '0' }} className="divautoComplete"></div>
                     <Autocomplete
                       className={classes.autoComplete2}
                       size="small"
@@ -161,6 +201,7 @@ const Popup = ({ click }) => {
             </div>
             <br />
             <div className={classes.divautoComplete}>
+              <div style={{ backgroundColor: randomColors }} className="divautoComplete"></div>
               <Autocomplete
                 value={value1}
                 onChange={(event, newValue) => {
@@ -187,8 +228,8 @@ const Popup = ({ click }) => {
               <Link onClick={() => handleLink()}>+ Add new schema</Link>
             </Button>
           </div>
-        </div>
-        <div className={classes.divbtnSave} style={{}}>
+        </div >
+        <div className={classes.divbtnSave}>
           <Button className={classes.btnSave} type="submit">
             Save the Segment
           </Button>
@@ -196,8 +237,8 @@ const Popup = ({ click }) => {
             Cancel
           </Button>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 

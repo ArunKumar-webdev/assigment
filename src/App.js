@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "@mui/material";
 import Popup from "./Popup";
 import Drawer from "@mui/material/Drawer";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import "./styles.css";
 
 export default function ControllableStates() {
@@ -15,7 +15,7 @@ export default function ControllableStates() {
   };
 
   return (
-    <div>
+    <div className="">
       <diV class="main">
         <Button
           style={{
@@ -24,7 +24,7 @@ export default function ControllableStates() {
             fontSize: "20px"
           }}
         >
-          <ArrowBackIosIcon /> View Audience
+          <KeyboardArrowLeftIcon /> View Audience
         </Button>
       </diV>
 
