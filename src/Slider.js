@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Link from "@mui/material/Link";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import axios from "axios";
@@ -9,9 +9,9 @@ import { stylesheet } from "./style";
 import Box from '@mui/material/Box';
 import Autocomplete from "@mui/material/Autocomplete";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { message } from 'antd';
-import 'antd/dist/antd.css';
 import { useLayoutEffect } from "react";
+import Button from '@mui/material/Button';
+
 
 const list = [
   { label: "First Name", value: "first_name" },
@@ -22,6 +22,8 @@ const list = [
   { label: "City", value: "city" },
   { label: "State", value: "state" }
 ];
+
+
 
 
 const Slider = ({ click }) => {
@@ -35,6 +37,8 @@ const Slider = ({ click }) => {
   const [value1, setValue1] = useState([]);
   const [text, setText] = useState("");
 
+
+
   const handleClick = (item, index) => {
     array.splice(index, 1);
     const a = [...array];
@@ -46,17 +50,15 @@ const Slider = ({ click }) => {
     setoptions(opt);
   };
 
-  const success = () => {
-    message.success('Segment Saved Sucessfully 😊');
-  };
+
 
   useLayoutEffect(() => {
     if (typeof window !== "undefined") {
       let spinner = document.getElementById("randomcolor0");
-      if (spinner&& spinner.style) {
+      if (spinner && spinner.style) {
         spinner.style.backgroundColor = '#910606';
       }
-      
+
     }
   }, [randomColors])
 
@@ -103,6 +105,7 @@ const Slider = ({ click }) => {
     setrandomColors(colors);
 
   }
+
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -253,7 +256,7 @@ const Slider = ({ click }) => {
           </div>
         </div >
         <div className={stylee.divbtnSave}>
-          <Button className={stylee.btnSave} onClick={success} type="submit">
+          <Button className={stylee.btnSave}d type="submit">
             Save the Segment
           </Button>
           <Button className={stylee.btnCancel} onClick={handleClick_Cancel}>
@@ -261,6 +264,7 @@ const Slider = ({ click }) => {
           </Button>
         </div>
       </form >
+
     </div >
   );
 };
