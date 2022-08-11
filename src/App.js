@@ -69,7 +69,7 @@ export default function ControllableStates() {
       ))}
       <Snackbar onClose={handleClose} open={open} autoHideDuration={2000}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          This is a success message!
+          Segment Saved 😊
         </Alert>
       </Snackbar>
     </div>
