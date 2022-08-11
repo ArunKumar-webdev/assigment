@@ -1,15 +1,16 @@
-import * as React from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import RemoveIcon from "@mui/icons-material/Remove";
+import { useState } from "react";
 import { Button, Typography } from "@mui/material";
 import Link from "@mui/material/Link";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import axios from "axios";
-import { useStyles } from "./style";
-import Box, { BoxProps } from '@mui/material/Box';
+import { stylesheet } from "./style";
+import Box from '@mui/material/Box';
+import Autocomplete from "@mui/material/Autocomplete";
+import RemoveIcon from "@mui/icons-material/Remove";
 
-const optionsList = [
+const list = [
   { label: "First Name", value: "first_name" },
   { label: "Last Name", value: "last_name" },
   { label: "Gender", value: "gender" },
@@ -21,14 +22,14 @@ const optionsList = [
 
 let randomColors = '#ADD8E6';
 
-const Popup = ({ click }) => {
+const Slider = ({ click }) => {
 
-  const [options, setoptions] = React.useState(optionsList);
-  const [inputValue, setInputValue] = React.useState([]);
-  const [array, setarray] = React.useState([]);
-  const [value, setValue] = React.useState([]);
-  const [value1, setValue1] = React.useState([]);
-  const [text, setText] = React.useState("");
+  const [options, setoptions] = useState(list);
+  const [inputValue, setInputValue] = useState([]);
+  const [array, setarray] = useState([]);
+  const [value, setValue] = useState([]);
+  const [value1, setValue1] = useState([]);
+  const [text, setText] = useState("");
 
   const handleClick = (item, index) => {
     array.splice(index, 1);
@@ -46,7 +47,6 @@ const Popup = ({ click }) => {
     const dummyarr = [...array];
     if (inputValue !== "") {
       dummyarr.push(value);
-
       let uniqueOptions = [...new Set(dummyarr)];
       setarray(uniqueOptions);
       const arropt = options.filter((val) => val.value !== value.value);
@@ -59,13 +59,12 @@ const Popup = ({ click }) => {
     setValue1(newInputValue);
   };
 
-  const handleonchange_Auto2 = (e, newValue) => {
+  const handleonchange2 = (e, newValue) => {
     setValue(newValue);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     handleClick_Cancel();
     postUser();
   };
@@ -88,7 +87,7 @@ const Popup = ({ click }) => {
   const handleAuto2 = (newValue, a, i) => {
     const autoarr = array;
     autoarr[i] = newValue;
-    var options2 = [...optionsList];
+    var options2 = [...list];
     autoarr.map((val1, index) => {
       options2 = options2.filter((val2) => val2?.value !== val1?.value);
     });
@@ -96,41 +95,38 @@ const Popup = ({ click }) => {
   };
 
   async function postUser() {
-    let payload = {
+    let sentValues = {
       segment_name: text,
       schema: array
     };
-    alert(JSON.stringify(payload));
     axios
       .post(
         "https://webhook.site/3b144348-9bd4-4839-ad5f-bb687bfee3c1",
-        payload
+        sentValues
       )
       .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
       });
   }
 
-  const classes = useStyles();
+  const stylee = stylesheet();
 
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <diV className={classes.popup}>
-          <Button className={classes.btnSegment} onClick={handleClick_Cancel}>
+        <div className={stylee.slider}>
+          <Button className={stylee.btnSegment} onClick={handleClick_Cancel}>
             <KeyboardArrowLeftIcon /> Saving Segment
           </Button>
-        </diV>
-        <div className={classes.middle}>
+        </div>
+        <div className={stylee.middle}>
           <div style={{ margin: "25px" }}>
             <Typography>Enter the Name of the segment</Typography>
             <br />
             <div>
               <TextField
-                className={classes.txtfield}
+                className={stylee.txtfield}
                 size="small"
                 placeholder="Name of the segment"
                 onChange={handleChange}
@@ -155,7 +151,7 @@ const Popup = ({ click }) => {
 
                 </div>
                 <div>
-                  User Traits
+                  - User Traits
                 </div>
               </div>
               <div style={{ display: "flex", alignItems: 'center' }} id='GroupTraits'>
@@ -163,17 +159,17 @@ const Popup = ({ click }) => {
 
                 </div>
                 <div>
-                  Group Traits
+                  - Group Traits
                 </div>
               </div>
             </Box>
-            <div className={array.length ? classes.divauto2 : ""}>
+            <div className={array.length ? stylee.auto2 : ""}>
               {array.map((item, index) => {
                 return (
-                  <div className={classes.disauto2} key={index}>
+                  <div className={stylee.div2} key={index}>
                     <div id='randomcolor' style={{ backgroundColor: '#' + randomColors, marginTop: '0' }} className="divautoComplete"></div>
                     <Autocomplete
-                      className={classes.autoComplete2}
+                      className={stylee.auto1}
                       size="small"
                       value={item.label}
                       onChange={(event, newValue) => {
@@ -200,12 +196,12 @@ const Popup = ({ click }) => {
               })}
             </div>
             <br />
-            <div className={classes.divautoComplete}>
+            <div className={stylee.divarea}>
               <div style={{ backgroundColor: randomColors }} className="divautoComplete"></div>
               <Autocomplete
                 value={value1}
                 onChange={(event, newValue) => {
-                  handleonchange_Auto2(event, newValue);
+                  handleonchange2(event, newValue);
                 }}
                 inputValue={inputValue}
                 onInputChange={(event, newInputValue) => {
@@ -224,16 +220,18 @@ const Popup = ({ click }) => {
                 )}
               />
             </div>
-            <Button className={classes.link}>
-              <Link onClick={() => handleLink()}>+ Add new schema</Link>
+            <Button className={stylee.link}>
+              <div className="atag">
+                <Link onClick={() => handleLink()}>+ Add new schema</Link>
+              </div>
             </Button>
           </div>
         </div >
-        <div className={classes.divbtnSave}>
-          <Button className={classes.btnSave} type="submit">
+        <div className={stylee.divbtnSave}>
+          <Button className={stylee.btnSave} type="submit">
             Save the Segment
           </Button>
-          <Button className={classes.btnCancel} onClick={handleClick_Cancel}>
+          <Button className={stylee.btnCancel} onClick={handleClick_Cancel}>
             Cancel
           </Button>
         </div>
@@ -242,4 +240,4 @@ const Popup = ({ click }) => {
   );
 };
 
-export default Popup;
+export default Slider;

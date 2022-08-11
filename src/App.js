@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button } from "@mui/material";
-import Popup from "./Popup";
+import Slider from "./Slider";
 import Drawer from "@mui/material/Drawer";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import "./styles.css";
@@ -16,7 +16,7 @@ export default function ControllableStates() {
 
   return (
     <div className="">
-      <diV class="main">
+      <div className="main">
         <Button
           style={{
             color: "white",
@@ -26,23 +26,23 @@ export default function ControllableStates() {
         >
           <KeyboardArrowLeftIcon /> View Audience
         </Button>
-      </diV>
+      </div>
 
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button
-            class="mainbtnSegment"
+          <button
+            className="mainbtnSegment"
             onClick={() => toggleDrawer(anchor, true)}
           >
             Save Segment
-          </Button>
+          </button>
 
           <Drawer
             anchor={anchor}
             open={state[anchor]}
             onClose={() => toggleDrawer(anchor, false)}
           >
-            <Popup click={toggleDrawer} />
+            <Slider click={toggleDrawer} />
           </Drawer>
         </React.Fragment>
       ))}

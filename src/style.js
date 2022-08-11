@@ -1,24 +1,16 @@
 import { makeStyles } from "@mui/styles";
-import { display } from "@mui/system";
 
-export const useStyles = makeStyles((theme) => ({
+export const stylesheet = makeStyles((theme) => ({
   main: {
     display: "flex",
     backgroundColor: "rgb(67, 201, 206)",
     height: "80px",
     margin: "-8px"
   },
-  mainbtnSegment: {
-    marginTop: "50px",
-    marginLeft: "50px",
-    border: "5px solid white",
-    backgroundColor: "grey",
-    color: "white"
-  },
-  mainbtn: {
-    color: "white",
-    textTransform: "capitalize",
-    fontSize: "20px"
+  divarea: {
+    border: "3px solid white",
+    marginLeft: "10px",
+    display: "flex"
   },
   btnCancel: {
     color: "grey",
@@ -26,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: "10px",
     textTransform: "capitalize"
   },
-  popup: {
+  slider: {
     display: "flex",
     backgroundColor: "rgb(67, 201, 206)",
     height: "80px"
@@ -42,14 +34,30 @@ export const useStyles = makeStyles((theme) => ({
   middle: {
     height: "80vh",
     overflowY: "auto"
+  },  
+  btnSave: {
+    color: "white",
+    backgroundColor: "grey",
+    marginLeft: "10px",
+    textTransform: "none"
   },
-  autoComplete2: {
+  link: {
+    fontSize: "12px",
+  },
+  auto1: {
     margin: "10px"
   },
-  divautoComplete: {
-    border: "3px solid white",
-    marginLeft: "10px",
-    display: "flex"
+  mainbtn: {
+    color: "white",
+    textTransform: "capitalize",
+    fontSize: "20px"
+  },  
+  auto2: {
+    border: "3px solid #2596be"
+  },
+  div2: {
+    display: "flex",
+    alignItems: "center"
   },
   divbtnSave: {
     display: "flex",
@@ -60,20 +68,4 @@ export const useStyles = makeStyles((theme) => ({
     height: "80px",
     width: "100%"
   },
-  btnSave: {
-    color: "white",
-    backgroundColor: "grey",
-    marginLeft: "10px",
-    textTransform: "none"
-  },
-  link: {
-    fontSize: "12px",
-  },
-  divauto2: {
-    border: "3px solid lightblue"
-  },
-  disauto2: {
-    display: "flex",
-    alignItems: "center"
-  }
 }));
