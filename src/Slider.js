@@ -9,6 +9,9 @@ import { stylesheet } from "./style";
 import Box from '@mui/material/Box';
 import Autocomplete from "@mui/material/Autocomplete";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { message } from 'antd';
+import 'antd/dist/antd.css';
+import { useLayoutEffect } from "react";
 
 const list = [
   { label: "First Name", value: "first_name" },
@@ -20,9 +23,10 @@ const list = [
   { label: "State", value: "state" }
 ];
 
-let randomColors = '#ADD8E6';
 
 const Slider = ({ click }) => {
+
+  const [randomColors, setrandomColors] = useState('#ADD8E6');
 
   const [options, setoptions] = useState(list);
   const [inputValue, setInputValue] = useState([]);
@@ -42,10 +46,30 @@ const Slider = ({ click }) => {
     setoptions(opt);
   };
 
+  const success = () => {
+    message.success('Segment Saved Sucessfully 😊');
+  };
+
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") {
+      let spinner = document.getElementById("randomcolor0");
+      if (spinner&& spinner.style) {
+        spinner.style.backgroundColor = '#910606';
+      }
+      
+    }
+  }, [randomColors])
+
+
   const handleLink = () => {
     randomColor();
     const dummyarr = [...array];
     if (inputValue !== "") {
+      if (randomColors === "ADD8E6") {
+        value['color'] = '910606';
+      } else {
+        value['color'] = randomColors;
+      }
       dummyarr.push(value);
       let uniqueOptions = [...new Set(dummyarr)];
       setarray(uniqueOptions);
@@ -75,8 +99,8 @@ const Slider = ({ click }) => {
 
 
   function randomColor() {
-    randomColors = Math.floor(Math.random() * 16777215).toString(16);
-    return randomColors;
+    let colors = Math.floor(Math.random() * 16777215).toString(16);
+    setrandomColors(colors);
 
   }
 
@@ -105,6 +129,7 @@ const Slider = ({ click }) => {
         sentValues
       )
       .then(function (response) {
+
       })
       .catch(function (error) {
       });
@@ -167,7 +192,7 @@ const Slider = ({ click }) => {
               {array.map((item, index) => {
                 return (
                   <div className={stylee.div2} key={index}>
-                    <div id='randomcolor' style={{ backgroundColor: '#' + randomColors, marginTop: '0' }} className="divautoComplete"></div>
+                    <div id={'randomcolor' + index} style={{ backgroundColor: '#' + item.color, marginTop: '0' }} className="divautoComplete"></div>
                     <Autocomplete
                       className={stylee.auto1}
                       size="small"
@@ -228,7 +253,7 @@ const Slider = ({ click }) => {
           </div>
         </div >
         <div className={stylee.divbtnSave}>
-          <Button className={stylee.btnSave} type="submit">
+          <Button className={stylee.btnSave} onClick={success} type="submit">
             Save the Segment
           </Button>
           <Button className={stylee.btnCancel} onClick={handleClick_Cancel}>
